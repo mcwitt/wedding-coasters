@@ -27,3 +27,8 @@ executable apollonian-gasket
   build-depends:  diagrams-contrib
   hs-source-dirs: designs/apollonian-gasket
   main-is:        Main.hs
+
+executable pythagorean-tree
+  import:         common-diagram
+  hs-source-dirs: designs/pythagorean-tree
+  main-is:        Main.hs
