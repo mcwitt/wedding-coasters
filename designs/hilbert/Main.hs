@@ -2,6 +2,7 @@
 
 import Diagrams.Backend.SVG.CmdLine
 import Diagrams.Prelude
+import Lib (makeCoaster)
 
 hilbert 0 = mempty
 hilbert n =
@@ -14,6 +15,6 @@ hilbert n =
   where
     hilbert' m = hilbert m # rotateBy (1 / 4)
 
-example = frame 1 . lw medium . strokeT $ hilbert 5
+example = hilbert 5 # strokeT # centerXY # lw medium . frame 1
 
-main = mainWith (example :: Diagram B)
+main = mainWith (makeCoaster example :: Diagram B)

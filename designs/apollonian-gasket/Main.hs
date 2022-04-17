@@ -3,7 +3,8 @@
 import Diagrams.Backend.SVG.CmdLine
 import Diagrams.Prelude
 import Diagrams.TwoD.Apollonian
+import Lib (makeCoaster)
 
-example = apollonianGasket 0.01 2 3 3 # centerXY # pad 1.1
+example = apollonianGasket 0.01 2 3 3
 
-main = mainWith (example :: Diagram B)
+main = mainWith (makeCoaster example :: Diagram B)

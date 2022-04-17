@@ -1,5 +1,6 @@
 import Diagrams.Backend.SVG.CmdLine
 import Diagrams.Prelude
+import Lib (makeCoaster)
 
 tree θ = go 1
   where
@@ -7,9 +8,14 @@ tree θ = go 1
     go w n =
       fromOffsets [r2 (0, w)]
         <> go (w * cosA θ) (n - 1) # rotate θ
-        <> go (w * sinA θ) (n - 1) # rotate (θ <> (3 / 4 @@ turn))
+        <> go (w * sinA θ) (n - 1) # rotate (θ <> (-1 / 4 @@ turn))
         <> fromOffsets [r2 (0, - w)]
 
-example = frame 1 . lw veryThin . strokeT $ tree (40 @@ deg) 10
+example =
+  (tree (40 @@ deg) 10 `at` origin)
+    # trailVertices
+    # cubicSpline True
+    # lw none
+    # frame 1
 
-main = mainWith (example :: Diagram B)
+main = mainWith (makeCoaster example :: Diagram B)
