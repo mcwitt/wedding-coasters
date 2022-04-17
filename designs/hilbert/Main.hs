@@ -15,6 +15,6 @@ hilbert n =
   where
     hilbert' m = hilbert m # rotateBy (1 / 4)
 
-example = hilbert 5 # strokeT # centerXY # lw medium . frame 1
+example = hilbert 5 # strokeT # lw medium
 
 main = mainWith (makeCoaster example :: Diagram B)

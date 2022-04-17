@@ -8,8 +8,8 @@ makeCoaster diagram =
   let outline = circle 1
    in strokeP outline
         `atop` diagram
-        # centerXY
-        # sized (dims2D 2 2)
-        # clipBy outline
-        # lc green
-        # fc green
+          # sized (dims2D 2 2)
+          # centerXY
+          # clipBy outline
+          # lc green
+          # fc green

@@ -12,10 +12,10 @@ tree θ = go 1
         <> fromOffsets [r2 (0, - w)]
 
 example =
-  (tree (40 @@ deg) 10 `at` origin)
+  tree (40 @@ deg) 10
+    # (`at` origin)
     # trailVertices
     # cubicSpline True
     # lw none
-    # frame 1
 
 main = mainWith (makeCoaster example :: Diagram B)
