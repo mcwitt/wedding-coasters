@@ -45,3 +45,8 @@ executable dragon
   import:         common, common-design
   hs-source-dirs: designs/dragon
   main-is:        Main.hs
+
+executable snowflake
+  import:         common, common-design
+  hs-source-dirs: designs/snowflake
+  main-is:        Main.hs
