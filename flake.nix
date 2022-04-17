@@ -1,36 +1,37 @@
 {
-  # inspired by: https://serokell.io/blog/practical-nix-flakes#packaging-existing-applications
-  description = "A Hello World in Haskell with a dependency and a devShell";
+  description = "Art for laser-cut wedding coasters";
   inputs.nixpkgs.url = "nixpkgs";
   outputs = { self, nixpkgs }:
     let
       supportedSystems = [ "x86_64-linux" "x86_64-darwin" ];
-      forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor = forAllSystems (system: import nixpkgs {
         inherit system;
         overlays = [ self.overlay ];
       });
     in
     {
-      overlay = (final: prev: {
-        haskell-hello = final.haskellPackages.callCabal2nix "haskell-hello" ./. {};
+      overlay = (final: _: {
+        wedding-coasters = final.haskellPackages.callCabal2nix "wedding-coasters" ./. { };
       });
       packages = forAllSystems (system: {
-         haskell-hello = nixpkgsFor.${system}.haskell-hello;
+        wedding-coasters = nixpkgsFor.${system}.wedding-coasters;
       });
-      defaultPackage = forAllSystems (system: self.packages.${system}.haskell-hello);
+      defaultPackage = forAllSystems (system: self.packages.${system}.wedding-coasters);
       checks = self.packages;
-      devShell = forAllSystems (system: let haskellPackages = nixpkgsFor.${system}.haskellPackages;
-        in haskellPackages.shellFor {
-          packages = p: [self.packages.${system}.haskell-hello];
+      devShell = forAllSystems (system:
+        let haskellPackages = nixpkgsFor.${system}.haskellPackages;
+        in
+        haskellPackages.shellFor {
+          packages = _: [ self.packages.${system}.wedding-coasters ];
           withHoogle = true;
           buildInputs = with haskellPackages; [
             haskell-language-server
             ghcid
+            cabal-fmt
             cabal-install
+            ormolu
           ];
-        # Change the prompt to show that you are in a devShell
-        shellHook = "export PS1='\\e[1;34mdev > \\e[0m'";
         });
-  };
+    };
 }
