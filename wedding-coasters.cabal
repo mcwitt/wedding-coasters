@@ -50,3 +50,13 @@ executable snowflake
   import:         common, common-design
   hs-source-dirs: designs/snowflake
   main-is:        Main.hs
+
+executable random-walk
+  import:         common, common-design
+  hs-source-dirs: designs/random-walk
+  main-is:        Main.hs
+  build-depends:
+    , containers
+    , random
+    , random-shuffle
+    , recursion-schemes
