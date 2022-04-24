@@ -14,9 +14,11 @@ instance (Floating n, Ord n) => Transformable (Coaster b n) where
   transform t (Coaster d) = Coaster (transform t d)
 
 coaster :: (Renderable (Path V2 n) b, TypeableFloat n) => Maybe (QDiagram b V2 n Any) -> Coaster b n
-coaster dia = Coaster $ case dia of
-  Just d -> d # sized (dims2D 2 2) # centerXY # clipBy (circle 0.98)
-  Nothing -> circle 1 # strokeP
+coaster d =
+  let d' = case d of
+        Just d -> circle 1 # strokeP `atop` (d # sized (dims2D 2 2) # lw veryThin)
+        Nothing -> circle 1 # strokeP
+   in Coaster (d' # pad 1.1)
 
 arrange :: (TypeableFloat n) => [Coaster b n] -> QDiagram b V2 n Any
-arrange = gridCat' 4 . fmap unCoaster
+arrange = gridCat' 6 . fmap unCoaster

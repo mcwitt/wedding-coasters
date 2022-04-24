@@ -2,7 +2,7 @@ module Designs.Sunflower where
 
 import Diagrams.Prelude
 
-sunflowerPoints :: [P2 Double]
+sunflowerPoints :: (Enum n, Floating n) => [P2 n]
 sunflowerPoints = [p2 $ fromPolar (sqrt m) (2.4 * m) | m <- [1 ..]]
   where
     fromPolar r θ = (r * cos θ, r * sin θ)

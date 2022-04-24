@@ -1,10 +1,7 @@
-import Designs.RandomWalk
+import Designs.RandomWalk (runSelfAvoidingWalk)
 import Diagrams.Backend.SVG.CmdLine
 import Diagrams.Prelude
 
-example =
-  let (xs, _) = flip runDist (mkStdGen 137) $ selfAvoidingWalk (0, 0) 1500
-   in fromVertices [p2 (fromIntegral x, fromIntegral y) | (x, y) <- xs]
-        # strokeP
+example = runSelfAvoidingWalk 2 40 1800 (0, 0) 8
 
-main = mainWith (makeCoaster example :: Diagram B)
+main = mainWith (example :: Diagram B)

@@ -26,6 +26,7 @@ library
   hs-source-dirs:  src
   exposed-modules:
     Coaster
+    Designs
     Designs.Dragon
     Designs.Hilbert
     Designs.PythagoreanTree
@@ -40,9 +41,14 @@ library
     , random-shuffle
     , recursion-schemes
 
-executable wedding-coasters
+executable make-coasters
   import:         common, common-design
-  hs-source-dirs: app
+  hs-source-dirs: app/make-coasters
+  main-is:        Main.hs
+
+executable make-jig
+  import:         common, common-design
+  hs-source-dirs: app/make-jig
   main-is:        Main.hs
 
 executable hilbert

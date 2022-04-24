@@ -46,7 +46,6 @@ paths :: Tree a -> Int -> [[a]]
 paths = cata go
   where
     go (NodeF x _) 1 = [[x]]
-    go (NodeF x []) _ = [[x]]
     go (NodeF x fs) n = [x : p | f <- fs, p <- f (n - 1)]
 
 splitGen :: RandomGen g => (g -> a) -> Dist g a
@@ -55,17 +54,27 @@ splitGen f = Dist $ \g ->
       x = f g'
    in (x, g'')
 
-selfAvoidingWalk :: RandomGen g => (Int, Int) -> Int -> Dist g [(Int, Int)]
-selfAvoidingWalk origin steps = do
+selfAvoidingWalk :: RandomGen g => Int -> Int -> Int -> (Int, Int) -> Dist g [(Int, Int)]
+selfAvoidingWalk z size steps origin = do
   t <- generateM neighborsGen (0, 0)
-  let ps = flip paths steps $ prune t
-      Just p = find ((== steps) . length) ps
+  let p = head $ flip paths steps $ prune t
   pure p
   where
-    neighborsGen p = let ns = neighbors p in splitGen . shuffle' ns $ length ns
+    neighborsGen p =
+      let ns = neighbors p
+          d = splitGen . shuffle' ns $ length ns
+       in take z <$> d
     neighbors (x, y) =
-      [ (x + 1, y),
-        (x - 1, y),
-        (x, y + 1),
-        (x, y - 1)
+      [ (x', y')
+        | (x', y') <-
+            [ (x + 1, y),
+              (x - 1, y),
+              (x, y + 1),
+              (x, y - 1)
+            ],
+          x' ^ 2 + y' ^ 2 < size ^ 2
       ]
+
+runSelfAvoidingWalk z size steps origin seed =
+  let (xs, _) = runDist (selfAvoidingWalk z size steps origin) (mkStdGen seed)
+   in fromVertices [p2 (fromIntegral x, fromIntegral y) | (x, y) <- xs]
