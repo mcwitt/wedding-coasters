@@ -65,3 +65,8 @@ executable ulam-spiral
   import:         common, common-design
   hs-source-dirs: designs/ulam-spiral
   main-is:        Main.hs
+
+executable sunflower
+  import:         common, common-design
+  hs-source-dirs: designs/sunflower
+  main-is:        Main.hs
