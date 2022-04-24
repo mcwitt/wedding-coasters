@@ -1,9 +1,9 @@
 -- Adapted from https://diagrams.github.io/gallery/Hilbert.lhs
+module Designs.Hilbert where
 
-import Diagrams.Backend.SVG.CmdLine
 import Diagrams.Prelude
-import Lib (makeCoaster)
 
+hilbert :: RealFloat n => Int -> Trail V2 n
 hilbert 0 = mempty
 hilbert n =
   hilbert' (n - 1)
@@ -17,7 +17,3 @@ hilbert n =
     # reflectX
   where
     hilbert' m = hilbert m # rotateBy (1 / 4)
-
-example = hilbert 5 # strokeT # lw medium
-
-main = mainWith (makeCoaster example :: Diagram B)

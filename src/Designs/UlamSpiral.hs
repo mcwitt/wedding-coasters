@@ -1,7 +1,6 @@
-import Diagrams.Backend.SVG.CmdLine
-import Diagrams.Path (pathPoints)
+module Designs.UlamSpiral where
+
 import Diagrams.Prelude
-import Lib (makeCoaster)
 
 primes = sieve [2 ..]
   where
@@ -28,14 +27,11 @@ spiral = scanl1 (<>) . offsets
     s = r2 (0, -1)
     w = r2 (-1, 0)
 
-example =
+ulamSpiral n =
   position
-    [ (p2 (getSum x, getSum y), square 1 # lw none)
-      | (i, V2 x y) <- zip [1 ..] (spiral 40),
+    [ (p2 (getSum x, getSum y), square 1)
+      | (i, V2 x y) <- zip [1 ..] (spiral n),
         isPrime i
     ]
   where
-    ps = take 10000 primes
-    dot = circle 0.2 # fc black
-
-main = mainWith (makeCoaster example :: Diagram B)
+    dot = circle 0.2

@@ -5,8 +5,9 @@ build-type:    Simple
 
 common common
   build-depends:
-    , base          >=4 && <5
+    , base              >=4 && <5
     , diagrams
+    , diagrams-contrib
     , diagrams-lib
     , diagrams-svg
 
@@ -23,50 +24,63 @@ common common-design
 library
   import:          common
   hs-source-dirs:  src
-  exposed-modules: Lib
+  exposed-modules:
+    Coaster
+    Designs.Dragon
+    Designs.Hilbert
+    Designs.PythagoreanTree
+    Designs.RandomWalk
+    Designs.Snowflake
+    Designs.Sunflower
+    Designs.UlamSpiral
 
-executable hilbert
-  import:         common, common-design
-  hs-source-dirs: designs/hilbert
-  main-is:        Main.hs
-
-executable apollonian-gasket
-  import:         common, common-design
-  build-depends:  diagrams-contrib
-  hs-source-dirs: designs/apollonian-gasket
-  main-is:        Main.hs
-
-executable pythagorean-tree
-  import:         common, common-design
-  hs-source-dirs: designs/pythagorean-tree
-  main-is:        Main.hs
-
-executable dragon
-  import:         common, common-design
-  hs-source-dirs: designs/dragon
-  main-is:        Main.hs
-
-executable snowflake
-  import:         common, common-design
-  hs-source-dirs: designs/snowflake
-  main-is:        Main.hs
-
-executable random-walk
-  import:         common, common-design
-  hs-source-dirs: designs/random-walk
-  main-is:        Main.hs
   build-depends:
     , containers
     , random
     , random-shuffle
     , recursion-schemes
 
+executable wedding-coasters
+  import:         common, common-design
+  hs-source-dirs: app
+  main-is:        Main.hs
+
+executable hilbert
+  import:         common, common-design
+  hs-source-dirs: examples/hilbert
+  main-is:        Main.hs
+
+executable apollonian-gasket
+  import:         common, common-design
+  hs-source-dirs: examples/apollonian-gasket
+  main-is:        Main.hs
+
+executable pythagorean-tree
+  import:         common, common-design
+  hs-source-dirs: examples/pythagorean-tree
+  main-is:        Main.hs
+
+executable dragon
+  import:         common, common-design
+  hs-source-dirs: examples/dragon
+  main-is:        Main.hs
+
+executable snowflake
+  import:         common, common-design
+  hs-source-dirs: examples/snowflake
+  main-is:        Main.hs
+
+executable random-walk
+  import:         common, common-design
+  hs-source-dirs: examples/random-walk
+  main-is:        Main.hs
+
 executable ulam-spiral
   import:         common, common-design
-  hs-source-dirs: designs/ulam-spiral
+  hs-source-dirs: examples/ulam-spiral
   main-is:        Main.hs
 
 executable sunflower
   import:         common, common-design
-  hs-source-dirs: designs/sunflower
+  hs-source-dirs: examples/sunflower
   main-is:        Main.hs
