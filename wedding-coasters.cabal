@@ -60,3 +60,8 @@ executable random-walk
     , random
     , random-shuffle
     , recursion-schemes
+
+executable ulam-spiral
+  import:         common, common-design
+  hs-source-dirs: designs/ulam-spiral
+  main-is:        Main.hs
