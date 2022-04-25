@@ -29,9 +29,11 @@ spiral = scanl1 (<>) . offsets
 
 ulamSpiral n =
   position
-    [ (p2 (getSum x, getSum y), square 1)
-      | (i, V2 x y) <- zip [1 ..] (spiral n),
-        isPrime i
+    [ (p2 (x, y), square 1)
+      | (i, V2 sx sy) <- zip [1 ..] (spiral n),
+        isPrime i,
+        let (x, y) = (getSum sx, getSum sy),
+        x ^ 2 + y ^ 2 < fromIntegral n ^ 2
     ]
   where
     dot = circle 0.2

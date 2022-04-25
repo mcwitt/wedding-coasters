@@ -7,4 +7,4 @@ import Diagrams.Prelude
 
 main =
   let outline = coaster Nothing
-   in mainWith (arrange . replicate 24 $ outline :: Diagram B)
+   in mainWith (arrange . replicate 6 $ outline :: Diagram B)

@@ -40,6 +40,7 @@ library
     , random
     , random-shuffle
     , recursion-schemes
+    , split
 
 executable make-coasters
   import:         common, common-design

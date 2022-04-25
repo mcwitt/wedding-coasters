@@ -13,12 +13,21 @@ import Diagrams.TwoD.Apollonian
 designs :: Renderable (Path V2 Double) b => [QDiagram b V2 Double Any]
 designs =
   [ dragons !! 10 # centerXY # pad 1.2,
-    hilbert 5 # strokeT # centerXY,
-    (tree (40 @@ deg) 10 `at` origin) # trailVertices # cubicSpline True # centerXY # pad 1.2,
-    ulamSpiral 40 # lw none # fc black,
+    let n = 5
+     in (hilbert n `at` p2 (0, 0))
+          # explodeTrail
+          # map (\lt -> strokeLocTrail lt # if norm (loc lt) < 2 ^ n then id else lw none)
+          # mconcat
+          # centerXY,
+    (tree (40 @@ deg) 10 `at` origin)
+      # trailVertices
+      # cubicSpline True
+      # centerXY
+      # pad 1.2,
+    ulamSpiral 40 # lw none # fc black # pad 1.1,
     snowflake 4 # pad 1.2,
     antisnowflake 4 # pad 1.3,
-    sunflower 0.6 1000 # lw none # fc black,
+    sunflower 0.6 1000 # lw none # fc black # pad 1.1,
     runSelfAvoidingWalk 2 40 1800 (0, 0) 8 # centerXY # pad 1.2,
-    apollonianGasket 0.01 2 3 4 # centerXY
+    apollonianGasket 0.01 2 3 4 # centerXY # pad 1.1
   ]
