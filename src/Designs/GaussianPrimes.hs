@@ -6,6 +6,9 @@ primes = sieve [2 ..]
   where
     sieve (x : xs) = x : sieve [x' | x' <- xs, x' `mod` x /= 0]
 
+isPrime 0 = False
+isPrime 1 = False
+isPrime 2 = True
 isPrime n = not . any (`divides` n) $ takeWhile (<= isqrt n) primes
   where
     divides k n = n `mod` k == 0
