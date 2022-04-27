@@ -20,5 +20,5 @@ designs =
     runSelfAvoidingWalk 2 40 1800 (0, 0) 8 # centerXY # pad 1.2,
     apollonianGasket 0.01 2 3 4 # centerXY # pad 1.1
   ]
-    <> replicate 3 (gaussianPrimes 40 # lw none # fc black # pad 1.1)
-    <> replicate 3 (sunflower 0.6 1000 # lw none # fc black # pad 1.1)
+    <> replicate 3 (gaussianPrimes 30 # lw none # fc black # pad 1.1)
+    <> replicate 3 (sunflower 0.6 800 # lw none # fc black # pad 1.1)
