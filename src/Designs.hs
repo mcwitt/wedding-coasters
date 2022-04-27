@@ -1,6 +1,7 @@
 module Designs where
 
 import Designs.Dragon (dragons)
+import Designs.GaussianPrimes (gaussianPrimes)
 import Designs.Hilbert (hilbert)
 import Designs.PythagoreanTree (tree)
 import Designs.RandomWalk (runSelfAvoidingWalk)
@@ -25,6 +26,7 @@ designs =
       # centerXY
       # pad 1.2,
     ulamSpiral 40 # lw none # fc black # pad 1.1,
+    gaussianPrimes 40 # lw none # fc black # pad 1.1,
     snowflake 4 # pad 1.2,
     antisnowflake 4 # pad 1.3,
     sunflower 0.6 1000 # lw none # fc black # pad 1.1,

@@ -28,6 +28,7 @@ library
     Coaster
     Designs
     Designs.Dragon
+    Designs.GaussianPrimes
     Designs.Hilbert
     Designs.PythagoreanTree
     Designs.RandomWalk
@@ -90,4 +91,9 @@ executable ulam-spiral
 executable sunflower
   import:         common, common-design
   hs-source-dirs: examples/sunflower
+  main-is:        Main.hs
+
+executable gaussian-primes
+  import:         common, common-design
+  hs-source-dirs: examples/gaussian-primes
   main-is:        Main.hs
