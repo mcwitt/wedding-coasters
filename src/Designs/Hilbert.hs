@@ -3,6 +3,7 @@
 
 module Designs.Hilbert where
 
+import Control.Applicative (ZipList (ZipList, getZipList))
 import Data.List (span)
 import Data.Maybe (mapMaybe)
 import Diagrams.Prelude
@@ -22,11 +23,12 @@ hilbert n =
   where
     hilbert' m = hilbert m # rotateBy (1 / 4)
 
+-- | Hilbert curve pruned to fit in a circle
 hilbert' n =
   (hilbert n `at` p2 (0, 0))
     # moveOriginBy (r2 (2 ^ (n - 1) - 1 / 2, -2 ^ (n - 1)))
-    # explodeTrail
-    # spans
+    # explodeTrail -- split trail into segments
+    # spans -- divide into spans alternating between inside and outside the circle
       ( \lt ->
           let r = 2 ^ (n - 1)
            in norm (loc lt) < r && norm (loc lt .+^ trailOffset (unLoc lt)) < r
@@ -36,8 +38,9 @@ hilbert' n =
           [] -> Nothing
           (x : xs) -> Just $ mconcat (map unLoc (x : xs)) `at` loc x
       )
-    # flip zip (cycle [none, veryThin])
-    # map (\(lt, w) -> strokeLocTrail lt # lw w)
+    # map strokeLocTrail
+    # (\lts -> ZipList (cycle [lw none, id]) <*> ZipList lts) -- set line width to 'none' outside the circle
+    # getZipList
     # mconcat
   where
     spans :: (a -> Bool) -> [a] -> [[a]]
