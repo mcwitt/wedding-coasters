@@ -10,3 +10,5 @@ tree θ = go 1
         <> go (w * cosA θ) (n - 1) # rotate θ
         <> go (w * sinA θ) (n - 1) # rotate (θ <> (-1 / 4 @@ turn))
         <> fromOffsets [r2 (0, -w)]
+
+tree' θ n = (tree θ n `at` origin) # trailVertices # cubicSpline True

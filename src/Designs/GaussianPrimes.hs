@@ -14,9 +14,9 @@ isPrime n = not . any (`divides` n) $ takeWhile (<= isqrt n) primes
     divides k n = n `mod` k == 0
     isqrt = ceiling . sqrt . fromIntegral
 
-isGaussianPrime a b = isPrime (a ^ 2 + b ^ 2) || cond a b || cond b a
+isGaussianPrime a b = isPrime (a ^ 2 + b ^ 2) || p a b || p b a
   where
-    cond x y = x == 0 && isPrime y && y `mod` 4 == 3
+    p x y = x == 0 && isPrime (abs y) && abs y `mod` 4 == 3
 
 gaussianPrimes n =
   position
