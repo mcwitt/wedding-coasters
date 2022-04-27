@@ -17,8 +17,7 @@ coaster :: (Renderable (Path V2 n) b, TypeableFloat n) => Maybe (QDiagram b V2 n
 coaster d =
   let d' = case d of
         Just d ->
-          circle 1 # strokeP
-            `atop` (d # sized (dims2D 2 2) # lw veryThin)
+          circle 1 # strokeP `atop` (d # sized (dims2D 2 2) # lw veryThin)
         Nothing -> circle 1 # strokeP
    in Coaster (d' # pad 1.1)
 

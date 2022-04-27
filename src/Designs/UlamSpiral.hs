@@ -35,5 +35,3 @@ ulamSpiral n =
         let (x, y) = (getSum sx, getSum sy),
         x ^ 2 + y ^ 2 < fromIntegral n ^ 2
     ]
-  where
-    dot = circle 0.2
