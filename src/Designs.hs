@@ -18,7 +18,7 @@ designs =
     tree' (40 @@ deg) 9 # centerXY # pad 1.2,
     antisnowflake 4 # pad 1.3,
     runSelfAvoidingWalk 2 40 1800 (0, 0) 8 # centerXY # pad 1.2,
-    apollonianGasket 0.01 2 3 4 # centerXY # pad 1.1
+    apollonianGasket 0.01 2 3 4 # centerXY # pad 1.1,
+    gaussianPrimes 30 # lw none # fc black # pad 1.1,
+    sunflower 0.6 800 # lw none # fc black # pad 1.1
   ]
-    <> replicate 3 (gaussianPrimes 30 # lw none # fc black # pad 1.1)
-    <> replicate 3 (sunflower 0.6 800 # lw none # fc black # pad 1.1)

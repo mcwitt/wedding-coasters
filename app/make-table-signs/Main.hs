@@ -5,4 +5,4 @@ import Designs (designs)
 import Diagrams.Backend.SVG.CmdLine
 import Diagrams.Prelude
 
-main = mainWith (arrange 6 $ map (coaster . Just) designs :: Diagram B)
+main = mainWith (arrange 3 $ map (coaster . Just . lw thin) designs :: Diagram B)

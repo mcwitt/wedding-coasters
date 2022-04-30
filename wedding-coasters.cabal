@@ -53,6 +53,11 @@ executable make-jig
   hs-source-dirs: app/make-jig
   main-is:        Main.hs
 
+executable make-table-signs
+  import:         common, common-design
+  hs-source-dirs: app/make-table-signs
+  main-is:        Main.hs
+
 executable hilbert
   import:         common, common-design
   hs-source-dirs: examples/hilbert
